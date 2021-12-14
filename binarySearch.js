@@ -8,10 +8,17 @@ class BinarySearch {
         this.searchNumber = searchNumber;
         this.startIndex = 0;
         this.endIndex = arr.length - 1;
+        this.midIndex = Math.round( ( this.startIndex + this.endIndex ) / 2 );
         this.iteration = 0;
     }
 
     search( searchNumber ) {
+        while ( this.arr[ this.midIndex ] === this.searchNumber ) {
+
+        }
+    }
+
+    getIterations() {
 
     }
 }
