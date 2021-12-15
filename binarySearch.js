@@ -1,40 +1,41 @@
 /** Бинарный поиск */
 
-const searchTest = [1, 3, 4, 5, 8, 13, 17, 20, 43, 45, 46, 48];  // 12
-
-class BinarySearch {
-    constructor( arr, searchNumber ) {
-        this.arr = arr;
-        this.searchNumber = searchNumber;
+export default class BinarySearch {
+    constructor( arr ) {
+        this.testArray = arr;
         this.startIndex = 0;
         this.endIndex = arr.length - 1;
-        this.midIndex = Math.round( ( this.startIndex + this.endIndex ) / 2 );
         this.iteration = 0;
     }
 
+    /**
+     * Поиск в массиве
+     * @param { number } searchNumber - искомое значение
+     * */
     search( searchNumber ) {
-        while ( this.arr[ this.midIndex ] === this.searchNumber ) {
+        this.searchNumber = searchNumber;
+        while ( this.testArray[ this.midIndex ] !== searchNumber ) {
+            this.searchStep();
+        }
+        return this.midIndex;
+    }
 
+    /** Шаг поиска */
+    searchStep() {
+        this.iteration += 1;
+        this.midIndex = Math.round( ( this.startIndex + this.endIndex ) / 2 );
+
+        if( this.testArray[ this.midIndex ] === this.searchNumber ) {
+            return this.midIndex;
+        } else if ( this.testArray[ this.midIndex ] < this.searchNumber ) {
+            this.startIndex = this.midIndex;
+        } else {
+            this.endIndex = this.midIndex;
         }
     }
 
+    /** Получение номера итерации */
     getIterations() {
-
+        return this.iteration;
     }
 }
-
-const binarySearch = ( arr, searchNumber, start = 0, end, iteration = 1 ) => {
-    const endIndex = end || arr.length - 1;
-    const midIndex = Math.round( ( start + endIndex ) / 2 );
-    const mid = arr[ midIndex ];
-
-    if ( mid === searchNumber ) {
-        console.log( 'Result:', mid, midIndex, iteration );
-    } else if( mid < searchNumber ) {
-        binarySearch( arr, searchNumber, midIndex, endIndex, ++iteration );
-    } else {
-        binarySearch( arr, searchNumber, start, midIndex, ++iteration );
-    }
-}
-
-binarySearch( searchTest, 43 );
