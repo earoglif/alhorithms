@@ -15,14 +15,14 @@ export default class BinarySearch {
     search( searchNumber ) {
         this.searchNumber = searchNumber;
         while ( this.testArray[ this.midIndex ] !== searchNumber ) {
-            this.searchStep();
+            this.doStep();
         }
         return this.midIndex;
     }
 
     /** Шаг поиска */
-    searchStep() {
-        this.iteration += 1;
+    doStep() {
+        this.iteration++;
         this.midIndex = Math.round( ( this.startIndex + this.endIndex ) / 2 );
 
         if( this.testArray[ this.midIndex ] === this.searchNumber ) {
